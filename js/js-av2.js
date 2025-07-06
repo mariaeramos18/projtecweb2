@@ -27,5 +27,13 @@ adicionarAoEstoque(valor) {
 
 // Método reduz o atributo numérico
 removerDoEstoque(valor) {
-
+    //Verifica se o valor é positivo
+    if (typeof valor === 'number' && valor > 0) {
+        //Verifica se remover deixará a quantidade negativa
+        if (this.qtdeEstoque - valor >= 0) {
+            this.qtdeEstoque -= valor;
+            return true; //Retorna verdadeiro se não deixar negativo
+        }
+        return false; //Retorna falso de o valor for inválido ou se a quantidade ficaria negativa
+    }
 }
