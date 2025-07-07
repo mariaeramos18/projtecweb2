@@ -48,4 +48,40 @@ class Calcado {
         this._carregar(); // Chama o método para carregar os dados
         return this; // Retorna o objeto atual com os dados carregados
     }
+
+    /**Limpa os dados */
+    limparDados() {
+        sessionStorage.removeItem('calcado'); // Remove os dados do calçado do sessionStorage
+        this.codigo = '';          // Limpa o código do calçado
+        this.modelo = '';          // Limpa o modelo/descrição
+        this.cor = '';             // Limpa a cor do calçado
+        this.tamanho = 0;          // Limpa o tamanho numérico
+        this.quantidade = 0;       // Limpa a quantidade em estoque
+    }
+
+    /**Método privado para salvar na sessão */
+    _salvar() {
+        const dados = {
+            codigo: this.codigo,
+            modelo: this.modelo,
+            cor: this.cor,
+            tamanho: this.tamanho,
+            quantidade: this.quantidade
+        };
+        sessionStorage.setItem('calcado', JSON.stringify(dados)); // Salva os dados do calçado no sessionStorage
+    }
+
+    // Método privado para carregar da sessão
+    _carregar() {
+        const dados = sessionStorage.getItem('calcado');
+        if (dados) {
+            const obj = JSON.parse(dados);
+            this.codigo = obj.codigo || '';
+            this.modelo = obj.modelo || '';
+            this.cor = obj.cor || '';
+            this.tamanho = Number(obj.tamanho) || 0;
+            this.quantidade = Number(obj.quantidade) || 0;
+        }
+        return this;
+    }
 }    
