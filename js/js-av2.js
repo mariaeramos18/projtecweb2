@@ -31,4 +31,15 @@ class Calcado {
         this._salvar(); // Chama o método para salvar os dados
         return this.quantidade; // Retorna a nova quantidade
     }
+
+    /**Remove quantidade do estoque */
+    removerQuantidade(qtde) {
+        qtde = Number(qtde); // Converte a quantidade para número
+        if (isNaN(qtde)) {
+            throw new Error('Quantidade inválida para remoção.');
+        }
+        if (qtde <= 0) {
+            throw new Error('Quantidade deve ser positiva.');
+        }
+    }
 }    
