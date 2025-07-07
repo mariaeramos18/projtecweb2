@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Adicionar ao Estoque</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="/js/js-av2.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Adicionar ao Estoque</h1>
+        </header>
+        <main>
+            <div class="form-group">
+                <label for="qtde-adicionar">Quantidade a adicionar:</label>
+                <input id="qtde-adicionar" class="form-input" type="number" min="1" autofocus>
+            </div>
+            <p id="txtMensagem"></p>
+            <div class="button-group">
+                <button class="btn btn-secondary" type="button" onclick="history.back()">Retornar</button>
+                <button class="btn btn-primary" type="button" onclick="adicionar()">Gravar Entrada</button>
+            </div>
+        </main>
+    </div>
+    <script type="text/javascript">
+        function adicionar() {
+            const qtdeInput = document.getElementById('qtde-adicionar');
+            if (qtdeInput.value === "" || isNaN(qtdeInput.value) || Number(qtdeInput.value) <= 0) {
+                document.getElementById("txtMensagem").innerHTML = `<b>Insira uma quantidade numérica válida.</b>`;
+                qtdeInput.focus();
+            } else {
+                const calcado = new Calcado();
+                calcado.adicionarEstoque(Number(qtdeInput.value));
+                document.getElementById("txtMensagem").innerHTML = `<b>Entrada realizada com sucesso!</b>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

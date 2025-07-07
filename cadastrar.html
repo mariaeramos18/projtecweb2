@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Cadastrar Calçado</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/js-av2.js"></script>
+    <style>
+        #txtMensagem {
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Cadastro de Calçado</h1>
+        </header>
+        <main>
+            <form id="form-calcado" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="id-calcado">ID do Calçado:</label>
+                    <input id="id-calcado" class="form-input" type="text" placeholder="0439" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="nome-calcado">Nome:</label>
+                    <input id="nome-calcado" class="form-input" type="text" placeholder="Digite o nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="cor-calcado">Cor:</label>
+                    <input id="cor-calcado" class="form-input" type="text" placeholder="Ex: Preto/Branco" required>
+                </div>
+                <div class="form-group">
+                    <label for="tamanho-calcado">Tamanho:</label>
+                    <input id="tamanho-calcado" class="form-input" type="number" placeholder="Ex: 42" required>
+                </div>
+                <div class="form-group">
+                    <label for="qtde-estoque">Quantidade a cadastrar:</label>
+                    <input id="qtde-estoque" class="form-input" type="number" min="0" placeholder="Ex: 10" required>
+                </div>
+
+                <div id="txtMensagem"></div>
+
+                <div class="button-group">
+                    <button class="btn btn-secondary" type="button" onclick="history.back()">Retornar</button>
+                    <button class="btn btn-primary" type="button" onclick="cadastrar()">Gravar</button>
+                </div>
+            </form>
+        </main>
+    </div>
+    <script type="text/javascript">
+        function cadastrar() {
+            // Limpa mensagens anteriores
+            const mensagem = document.getElementById("txtMensagem");
+            mensagem.innerHTML = '';
+            mensagem.className = '';
+
+            // Obtém valores dos campos
+            const id = document.getElementById('id-calcado').value.trim();
+            const nome = document.getElementById('nome-calcado').value.trim();
+            const cor = document.getElementById('cor-calcado').value.trim();
+            const tamanho = document.getElementById('tamanho-calcado').value;
+            const quantidade = document.getElementById('qtde-estoque').value;
+
+            // Validações
+            if (!id || !nome || !cor || !tamanho || !quantidade) {
+                mensagem.innerHTML = `<b>Por favor, preencha todos os campos.</b>`;
+                mensagem.className = 'error';
+                return;
+            }
+
+            if (isNaN(tamanho) || isNaN(quantidade)) {
+                mensagem.innerHTML = `<b>Tamanho e Quantidade devem ser numéricos.</b>`;
+                mensagem.className = 'error';
+                return;
+            }
+
+            if (quantidade < 0) {
+                mensagem.innerHTML = `<b>A quantidade não pode ser negativa.</b>`;
+                mensagem.className = 'error';
+                return;
+            }
+
+            try {
+                // Cria e cadastra o calçado
+                const calcado = new Calcado();
+                calcado.cadastrar(id, nome, cor, Number(tamanho), Number(quantidade));
+
+                // Feedback de sucesso
+                mensagem.innerHTML = `<b>Calçado cadastrado com sucesso!</b><br>
+                                    ID: ${id}<br>
+                                    Nome: ${nome}<br>
+                                    Quantidade: ${quantidade}`;
+                mensagem.className = 'success';
+
+                // Limpa o formulário (opcional)
+                document.getElementById('form-calcado').reset();
+                document.getElementById('id-calcado').focus();
+
+                // Verificação no sessionStorage (para debug)
+                console.log("Dados no sessionStorage:", sessionStorage.getItem('calcado'));
+
+            } catch (error) {
+                mensagem.innerHTML = `<b>Erro ao cadastrar calçado:</b> ${error.message}`;
+                mensagem.className = 'error';
+                console.error("Erro no cadastro:", error);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+/* style.css - Folha de Estilo Central para o Sistema de Material */
+
+/* Estilos Globais */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #333;
+}
+
+/* Contêiner Principal */
+.container {
+    background-color: #ffffff;
+    padding: 2rem 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+/* Cabeçalho e Títulos */
+header h1 {
+    font-size: 1.75rem;
+    color: #1c1e21;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+/* Grupos de Formulário (Label + Input) */
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Entradas de Texto (Inputs) */
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    box-sizing: border-box;
+    /* Garante que padding não afete a largura total */
+    font-size: 1rem;
+}
+
+.form-input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Inputs desabilitados (para consulta) */
+.form-input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+/* Grupo de Botões */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    /* Espaço entre os botões */
+    margin-top: 2rem;
+}
+
+/* Estilo Base dos Botões */
+.btn {
+    flex-grow: 1;
+    /* Faz os botões ocuparem o espaço disponível */
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Variações de Botões */
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Links do Menu Principal */
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-list li {
+    margin-bottom: 1rem;
+}
+
+.menu-list .btn {
+    display: block;
+    /* Faz o link ocupar a largura toda do item da lista */
+}
+
+
+/* Parágrafo de Mensagem */
+#txtMensagem {
+    margin-top: 1.5rem;
+    min-height: 24px;
+    /* Garante que o layout não "pule" quando a mensagem aparece */
+    font-weight: 600;
+    color: #007bff;
+}

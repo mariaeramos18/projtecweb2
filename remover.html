@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Remover do Estoque</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="/js/js-av2.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Remover do Estoque</h1>
+        </header>
+        <main>
+            <div class="form-group">
+                <label for="qtde-remover">Quantidade a remover:</label>
+                <input id="qtde-remover" class="form-input" type="number" min="1" autofocus>
+            </div>
+            <p id="txtMensagem"></p>
+            <div class="button-group">
+                <button class="btn btn-secondary" type="button" onclick="history.back()">Retornar</button>
+                <button class="btn btn-primary" type="button" onclick="remover()">Gravar Saída</button>
+            </div>
+        </main>
+    </div>
+    <script type="text/javascript">
+        function remover() {
+            const qtdeInput = document.getElementById('qtde-remover');
+            let mensagem = "";
+
+            if (qtdeInput.value === "" || isNaN(qtdeInput.value) || Number(qtdeInput.value) <= 0) {
+                mensagem = "Insira uma quantidade numérica válida.";
+                qtdeInput.focus();
+            } else {
+                const calcado = new Calcado();
+                if (calcado.removerEstoque(Number(qtdeInput.value))) {
+                    mensagem = "Saída realizada com sucesso!";
+                } else {
+                    mensagem = "Estoque indisponível para esta saída!";
+                }
+            }
+            document.getElementById("txtMensagem").innerHTML = `<b>${mensagem}</b>`;
+        }
+    </script>
+</body>
+
+</html>
