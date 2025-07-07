@@ -42,4 +42,10 @@ class Calcado {
             throw new Error('Quantidade deve ser positiva.');
         }
     }
+
+    /**Retorna os dados do calçado */
+    obterDados() {
+        this._carregar(); // Chama o método para carregar os dados
+        return this; // Retorna o objeto atual com os dados carregados
+    }
 }    
