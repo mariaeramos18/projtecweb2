@@ -84,4 +84,83 @@ class Calcado {
         }
         return this;
     }
-}    
+
+    /**
+     * Adiciona um novo calçado ao estoque, cadastrando todos os atributos
+     * @param {string} codigo Código do calçado
+     * @param {string} modelo Modelo/descrição
+     * @param {string} cor Cor do calçado
+     * @param {number} tamanho Tamanho numérico
+     * @param {number} quantidade Quantidade em estoque
+     */
+    adicionarNovoCalcado(codigo, modelo, cor, tamanho, quantidade) {
+        if (!codigo || !modelo || !cor || isNaN(tamanho) || isNaN(quantidade) || quantidade < 0) {
+            throw new Error('Preencha todos os campos corretamente.');
+        }
+        this.codigo = codigo;
+        this.modelo = modelo;
+        this.cor = cor;
+        this.tamanho = Number(tamanho);
+        this.quantidade = Number(quantidade);
+        this._salvar();
+        return this;
+    }
+
+    /**
+     * Cadastra um novo calçado e salva no sessionStorage
+     */
+    cadastrarCalcado(codigo, modelo, cor, tamanho, quantidade) {
+        if (!codigo || !modelo || !cor || isNaN(tamanho) || isNaN(quantidade) || quantidade < 0) {
+            return false;
+        }
+        this.codigo = codigo;
+        this.modelo = modelo;
+        this.cor = cor;
+        this.tamanho = Number(tamanho);
+        this.quantidade = Number(quantidade);
+        sessionStorage.setItem("calcado_codigo", this.codigo);
+        sessionStorage.setItem("calcado_modelo", this.modelo);
+        sessionStorage.setItem("calcado_cor", this.cor);
+        sessionStorage.setItem("calcado_tamanho", this.tamanho);
+        sessionStorage.setItem("calcado_quantidade", this.quantidade);
+        return true;
+    }
+
+    /**
+     * Consulta o calçado cadastrado no sessionStorage
+     */
+    consultarCalcado() {
+        this.codigo = sessionStorage.getItem("calcado_codigo") || '';
+        this.modelo = sessionStorage.getItem("calcado_modelo") || '';
+        this.cor = sessionStorage.getItem("calcado_cor") || '';
+        this.tamanho = Number(sessionStorage.getItem("calcado_tamanho")) || 0;
+        this.quantidade = Number(sessionStorage.getItem("calcado_quantidade")) || 0;
+        return {
+            codigo: this.codigo,
+            modelo: this.modelo,
+            cor: this.cor,
+            tamanho: this.tamanho,
+            quantidade: this.quantidade
+        };
+    }
+}
+
+// Função para login
+function login() {
+    const email = document.getElementById('txtEmail').value;
+    const senha = document.getElementById('txtSenha').value;
+    const msg = document.getElementById('txtMensagem');
+
+    //Só será possível entrar com o e-mail teste.com.br e senha teste
+    if (email === 'teste.com.br' && senha === 'teste') {
+        window.location.href = 'menu.html';
+    } else {
+        msg.innerHTML = 'E-mail ou senha incorretos';
+        document.getElementById('txtEmail').focus();
+    }
+}
+
+// Função para encerrar
+function encerrar() {
+    window.location.href = 'encerrar.html';
+}
